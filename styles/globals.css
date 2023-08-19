@@ -21,3 +21,35 @@ label{
 .btn-primary{
   @apply bg-blue-900 text-white px-4 py-1 rounded-md;
 }
+
+.btn-red{
+  @apply bg-red-700 text-white px-4 py-1 rounded-md;
+}
+
+.btn-gray{
+    @apply bg-gray-500 text-white px-4 py-1 rounded-md;
+}
+
+table.basic{
+  @apply w-full;
+}
+
+table.basic thead tr td{
+  @apply bg-blue-100
+}
+
+table.basic tr td{
+  @apply border border-blue-500 p-1;
+}
+
+table.basic a{
+  @apply bg-blue-900 text-white text-sm py-1 px-2 rounded-md inline-flex gap-1 m-0.5;
+}
+
+.img-upload {
+    @apply border w-24 h-24 text-center flex flex-col items-center justify-center text-sm gap-1 text-gray-500 rounded-lg cursor-pointer
+}
+
+.img-upload:hover {
+  @apply text-blue-900 text-base border-blue-400
+}
