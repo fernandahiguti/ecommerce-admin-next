@@ -1,18 +1,20 @@
 import {useState} from "react";
 import axios from "axios";
 import {useRouter} from "next/router";
+import { set } from "mongoose";
 
 export default function ProductForm({
   _id,
   title: existingTitle, 
   description: existingDescription, 
   price: existingPrice,
-  images,
+  images: existingImages,
 }) {
 
   const [title, setTitle] = useState(existingTitle || '');
   const [description, setDescription] = useState(existingDescription || '');
   const [price, setPrice] = useState(existingPrice || '');
+  const [images, setImages] = useState([existingImages || '']);
   const [goToProducts, setGoToProducts] = useState(false);
   const router = useRouter();
 
@@ -39,11 +41,10 @@ export default function ProductForm({
       for (const file of files) {
         data.append('file', file);
       }
-     const res = await fetch('/api/upload', {
-        method: 'POST',
-        body: data
-      })
-      console.log(res);
+     const res = await axios.post('/api/upload', data);
+     setImages(oldImages => {
+      return [...oldImages, ...res.data.links];
+     })
     }
   }
 
@@ -59,7 +60,12 @@ export default function ProductForm({
       <label>
         Photos
       </label>
-      <div className="mb2">
+      <div className="mb2 flex flex-wrap gap-2">
+        {!!images?.length && images.map(link => (
+          <div key={link} className="h-24">
+            <img src={link}  className="rounded-lg"/>
+          </div>
+        ))}
         <label className="img-upload">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
            <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />

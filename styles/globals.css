@@ -53,3 +53,7 @@ table.basic a{
 .img-upload:hover {
   @apply text-blue-900 text-base border-blue-400
 }
+
+img{
+  max-height:100%;
+}
