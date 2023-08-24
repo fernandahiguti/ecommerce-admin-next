@@ -1,7 +1,6 @@
 import {useState} from "react";
 import axios from "axios";
 import {useRouter} from "next/router";
-import { set } from "mongoose";
 import Spinner from "./Spinner";
 import { ReactSortable } from "react-sortablejs";
 
@@ -76,7 +75,7 @@ export default function ProductForm({
          setList={updateImagesOrder}>
         {!!images?.length && images.map(link => (
             <div key={link} className="h-24">
-             <img src={link}  className="rounded-lg"/>
+             <img src={link}  className="rounded-lg" alt=""/>
             </div>
         ))}
         </ReactSortable>
